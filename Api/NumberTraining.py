@@ -41,7 +41,7 @@ def solution_C2():
 if __name__ == '__main__':
     if __name__ == '__main__':
         model = solution_C2()
-        model.save("model_2.h5")
+        model.save("model_2a.h5")
 
 
 # In[7]:
