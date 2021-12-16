@@ -17,8 +17,6 @@ def foo():
     stream = BytesIO(imgdata)
     def load(filename):
         np_image = Image.open(filename)
-        np_image.save("test22.png")
-        # np_image.save("test.jpg", "JPEG", quality=100, optimize=True, progressive=True)
         np_image = np.array(np_image).astype('float32')/255
         np_image = transform.resize(np_image, (28, 28, 1))
         np_image = np.expand_dims(np_image, axis=0)
@@ -34,7 +32,6 @@ def foo():
     offset = ((bg_w - img_w) // 2, (bg_h - img_h) // 2)
     background.paste(img, offset)
     img = background
-    img.save("predict1.png")
 
     img = img.resize((basewidth,basewidth),PIL.Image.ANTIALIAS)
     img = img.convert('L')

@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[25]:
-
-
 import tensorflow as tf
 
 
@@ -41,77 +35,7 @@ def solution_C2():
 if __name__ == '__main__':
     if __name__ == '__main__':
         model = solution_C2()
-        model.save("model_2a.h5")
-
-
-# In[7]:
-
-
-import tensorflow as tf
-import cv2
-from matplotlib import pyplot as plt
-from PIL import Image
-import numpy as np
-from skimage import transform
-
-
-# In[19]:
-
-
-img = cv2.imread('./test2.png')
-plt.imshow(img , cmap='gray')
-
-
-# In[20]:
-
-
-def load(filename):
-    np_image = Image.open(filename)
-    np_image = np.array(np_image).astype('float32')/255
-    np_image = transform.resize(np_image, (28, 28, 1))
-    np_image = np.expand_dims(np_image, axis=0)
-    return np_image
-
-
-# In[21]:
-
-
-model = tf.keras.models.load_model('model_C2.h5')
-
-
-# In[22]:
-
-
-img = load('./test2.png')
-
-
-# In[23]:
-
-
-result = model.predict(img)
-predict_classes = np.argmax(result ,axis=1)
-
-
-# In[24]:
-
-
-predict_classes
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-results = model.predict(img)
-
-
-# In[ ]:
-
+        model.save("model_2.h5")
 
 
 
