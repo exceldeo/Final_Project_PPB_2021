@@ -17,7 +17,7 @@ class Utils {
             text,
             style: TextStyle(color: Colors.white, fontSize: 24),
           )),
-          duration: Duration(seconds: 3),
+          duration: Duration(seconds: 2),
           flushbarPosition: FlushbarPosition.TOP,
           backgroundColor: color,
           animationDuration: Duration(microseconds: 0),

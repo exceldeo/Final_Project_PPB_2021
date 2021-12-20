@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:signature/signature.dart';
 import 'package:signature_example/page/signature_preview_page.dart';
+import 'dart:math';
 
 class SignaturePage extends StatefulWidget {
   @override
@@ -12,6 +13,8 @@ class SignaturePage extends StatefulWidget {
 
 class _SignaturePageState extends State<SignaturePage> {
   SignatureController controller;
+  Random random = new Random();
+  int randomNumber = 0;
 
   @override
   void initState() {
@@ -21,6 +24,7 @@ class _SignaturePageState extends State<SignaturePage> {
       penStrokeWidth: 10,
       penColor: Colors.white,
     );
+    randomNumber = random.nextInt(10);
   }
 
   @override
@@ -31,15 +35,26 @@ class _SignaturePageState extends State<SignaturePage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        body: Column(
-          children: <Widget>[
-            Signature(
-              controller: controller,
-              backgroundColor: Colors.black,
-            ),
-            buildButtons(context),
-            buildSwapOrientation(),
-          ],
+        body: SafeArea(
+          child: Column(
+            children: <Widget>[
+              Container(
+                child: Center(
+                  child: Text(
+                    randomNumber.toString(),
+                    style: TextStyle(fontSize: 42),
+                  ),
+                ),
+                height: MediaQuery.of(context).size.height * 0.1,
+              ),
+              Signature(
+                controller: controller,
+                backgroundColor: Colors.black,
+              ),
+              buildButtons(context),
+              // buildSwapOrientation(),
+            ],
+          ),
         ),
       );
 
@@ -84,6 +99,7 @@ class _SignaturePageState extends State<SignaturePage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             buildCheck(context),
+            buildRandom(),
             buildClear(),
           ],
         ),
@@ -97,11 +113,23 @@ class _SignaturePageState extends State<SignaturePage> {
             final signature = await exportSignature();
 
             await Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => SignaturePreviewPage(signature: signature),
+              builder: (context) => SignaturePreviewPage(
+                  signature: signature, number: randomNumber),
             ));
 
             controller.clear();
           }
+        },
+      );
+
+  Widget buildRandom() => TextButton(
+        child: Text('Random Number'),
+        // iconSize: 36,
+        // icon: Icon(Icons.disc_full, color: Colors.green),
+        onPressed: () {
+          setState(() {
+            randomNumber = random.nextInt(10);
+          });
         },
       );
 

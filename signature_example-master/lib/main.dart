@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:signature_example/page/signature_page.dart';
+import 'package:signature_example/page/splash_screen.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +23,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primaryColor: Colors.red,
         ),
-        home: SignaturePage(),
+        home: SplashScreen(),
       );
 }

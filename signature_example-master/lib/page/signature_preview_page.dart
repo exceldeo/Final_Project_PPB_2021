@@ -10,10 +10,12 @@ import 'package:http/http.dart' as http;
 
 class SignaturePreviewPage extends StatelessWidget {
   final Uint8List signature;
+  final int number;
 
   const SignaturePreviewPage({
     Key key,
     @required this.signature,
+    @required this.number,
   }) : super(key: key);
 
   @override
@@ -49,7 +51,7 @@ class SignaturePreviewPage extends StatelessWidget {
 
     var data = "data:image/jpg;base64," + imageEncoded;
 
-    var url = Uri.parse('http://192.168.1.33:5000/test');
+    var url = Uri.parse('http://192.168.18.81:5000/test');
     final response = await http.post(url, body: imageEncoded);
 
     print(response.body);
@@ -68,17 +70,18 @@ class SignaturePreviewPage extends StatelessWidget {
     // if (isSuccess) {
     Navigator.pop(context);
 
-    Utils.showSnackBar(
-      context,
-      text: 'Angka yang anda tulis adalah ' + response.body,
-      color: Colors.green,
-    );
-    // } else {
-    //   Utils.showSnackBar(
-    //     context,
-    //     text: 'Failed to save painting',
-    //     color: Colors.red,
-    //   );
-    // }
+    if (response.body == number.toString()) {
+      Utils.showSnackBar(
+        context,
+        text: 'Angka yang anda tulis adalah ' + response.body,
+        color: Colors.green,
+      );
+    } else {
+      Utils.showSnackBar(
+        context,
+        text: 'Angka yang anda tuliskan salah',
+        color: Colors.red,
+      );
+    }
   }
 }
